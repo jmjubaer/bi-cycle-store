@@ -5,7 +5,11 @@ const createProductIntoDb = async(product: TProduct) => {
     const result = await Product.create(product);
     return result;
 }
-
+const getAllProductsFromDb = async() => {
+    const result = await Product.find();
+    return result;
+}
 export const productServices = {
-    createProductIntoDb
+    createProductIntoDb,
+    getAllProductsFromDb
 }

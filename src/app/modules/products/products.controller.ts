@@ -28,6 +28,26 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
+const getAllProducts = async (req: Request, res: Response) => {
+  try {
+    const result = await productServices.getAllProductsFromDb();
+
+    res.status(200).json({
+      success: true,
+      message: 'Bicycles retrieved successfully',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+      stack: error.stack,
+    });
+  }
+};
+
 export const productControllers = {
   createProduct,
+  getAllProducts,
 };
