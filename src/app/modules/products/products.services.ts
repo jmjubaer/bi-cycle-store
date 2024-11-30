@@ -1,15 +1,24 @@
-import { TProduct } from "./products.interface"
-import { Product } from "./products.model"
-
-const createProductIntoDb = async(product: TProduct) => {
-    const result = await Product.create(product);
-    return result;
-}
-const getAllProductsFromDb = async() => {
-    const result = await Product.find();
-    return result;
-}
+import { TProduct } from './products.interface';
+import { ObjectId } from 'mongodb';
+// product model
+import { Product } from './products.model';
+// add product into database
+const createProductIntoDb = async (product: TProduct) => {
+  const result = await Product.create(product);
+  return result;
+};
+// get all products form database
+const getAllProductsFromDb = async () => {
+  const result = await Product.find();
+  return result;
+};
+// get single product
+const getSingleProductsFromDb = async (id: string) => {
+  const result = await Product.findOne({ _id: new ObjectId(id) });
+  return result;
+};
 export const productServices = {
-    createProductIntoDb,
-    getAllProductsFromDb
-}
+  createProductIntoDb,
+  getAllProductsFromDb,
+  getSingleProductsFromDb,
+};
