@@ -15,6 +15,8 @@ const orderValidationSchema = z.object({
     .number()
     .positive("TotalPrice must be a positive number")
     .refine((val) => val > 0, { message: "TotalPrice is required" }),
+    createdAt: z.date().optional(), // Optional string
+    updatedAt: z.date().optional(), // Optional string
 });
 
 export default orderValidationSchema;
