@@ -7,7 +7,7 @@ export const ProductValidationSchema = z.object({
   type: z.enum(['Mountain', 'Road', 'Hybrid', 'BMX', 'Electric'],{ message: "{VALUE} is an invalid type" }),
   description: z.string().nonempty("description is required"), // Description should not be empty
   quantity: z.number().int().nonnegative("Quantity must be a positive number"), // Ensures quantity is a non-negative integer
-  inStock: z.boolean(),
+  inStock: z.boolean().default(true),
   createdAt: z.date().optional(), // Optional string
   updatedAt: z.date().optional(), // Optional string
 });

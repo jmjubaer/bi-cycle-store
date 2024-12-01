@@ -12,10 +12,10 @@ const productSchema = new Schema<TProduct>({
   },
   description: { type: String, required: true },
   quantity: { type: Number, required: true },
-  inStock: { type: Boolean, required: true },
+  inStock: { type: Boolean, required: true, default: true },
   createdAt: { type: Date },
-  updatedAt: { type: Date, timestamps: true},
- // Automatically adds createdAt and updatedAt fields
+  updatedAt: { type: Date, timestamps: true },
+  // Automatically adds createdAt and updatedAt fields
 });
 
 export const Product = model<TProduct>('Product', productSchema);
