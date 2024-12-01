@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { productServices } from './products.services';
 import ProductValidationSchema from './products.validation';
 
+// create product controller
 const createProduct = async (req: Request, res: Response) => {
   try {
     const product = req.body;
@@ -27,7 +28,7 @@ const createProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
+// get all product controller
 const getAllProducts = async (req: Request, res: Response) => {
   try {
     const result = await productServices.getAllProductsFromDb();
@@ -46,6 +47,7 @@ const getAllProducts = async (req: Request, res: Response) => {
     });
   }
 };
+// get single product controller
 const getSingleProducts = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -65,12 +67,15 @@ const getSingleProducts = async (req: Request, res: Response) => {
     });
   }
 };
-
+// update product controller
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const updateData = req.body;
-    const result = await productServices.updateProductsFromDb(productId,updateData);
+    const result = await productServices.updateProductsFromDb(
+      productId,
+      updateData,
+    );
 
     res.status(200).json({
       success: true,
@@ -87,9 +92,31 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
+// delete product controller
+const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    await productServices.deleteProductsFromDb(productId);
+
+    res.status(200).json({
+      success: true,
+      message: 'Bicycles deleted successfully',
+      data: {},
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+      stack: error.stack,
+    });
+  }
+};
+
 export const productControllers = {
   createProduct,
   getAllProducts,
   getSingleProducts,
-  updateProduct
+  updateProduct,
+  deleteProduct,
 };
