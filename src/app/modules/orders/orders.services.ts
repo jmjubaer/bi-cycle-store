@@ -26,11 +26,45 @@ const createOrderIntoDb = async (order: TOrder) => {
       { quantity: restProductQuantity },
     );
   }
-  
+
   const result = await Orders.create(order);
   return result;
 };
 
+// add order into database
+const calculateRevenueFromOrder = async () => {
+  const totalRevenue = await Orders.aggregate([
+    {
+      $addFields: {
+        productObjectId: { $toObjectId: "$product" }, // Convert string to ObjectId
+      },
+    },
+    {
+      $lookup: {
+        from: "products",
+        localField: "productObjectId",
+        foreignField: "_id",
+        as: "productDetails",
+      },
+    },
+    {
+      $unwind: '$productDetails', 
+    },
+    {
+      $group: {
+        _id: null, // Group all orders together
+        totalRevenue: {
+          $sum: {
+            $multiply: [ '$productDetails.price','$quantity'], // Calculate total price for each order
+          },
+        },
+      },
+    },
+  ]);
+  return totalRevenue; 
+};
+
 export const orderService = {
   createOrderIntoDb,
+  calculateRevenueFromOrder,
 };

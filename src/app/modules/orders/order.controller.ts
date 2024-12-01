@@ -28,7 +28,27 @@ const createOrder = async (req: Request, res: Response) => {
     });
   }
 };
+// create Order controller
+const getTotalRevenue = async (req: Request, res: Response) => {
+  try {
+  
+    const result = await orderService.calculateRevenueFromOrder();
+    res.status(200).json({
+      success: true,
+      message: 'Revenue calculated successfully',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.name === 'ZodError' ? 'Validation failed' : error.message,
+      error: error,
+      stack: error.stack,
+    });
+  }
+};
 
 export const orderControllers = {
   createOrder,
+  getTotalRevenue
 };
