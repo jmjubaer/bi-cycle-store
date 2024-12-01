@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const orderSchema = z.object({
+const orderValidationSchema = z.object({
   email: z
     .string()
     .email("Invalid email format")
@@ -17,4 +17,4 @@ const orderSchema = z.object({
     .refine((val) => val > 0, { message: "TotalPrice is required" }),
 });
 
-export default orderSchema;
+export default orderValidationSchema;
