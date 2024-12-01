@@ -9,10 +9,3 @@ export type TProduct = {
   createdAt?: Date;
   updatedAt?: Date;
 };
-
-export type TOrder = {
-  email: string;
-  product: string;
-  quantity: number;
-  totalPrice: number;
-};
