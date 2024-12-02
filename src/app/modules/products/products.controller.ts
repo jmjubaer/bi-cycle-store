@@ -16,12 +16,14 @@ const createProduct = async (req: Request, res: Response) => {
     });
     const result = await productServices.createProductIntoDb(zodParseData);
 
+    //  send the response
     res.status(200).json({
       success: true,
       message: 'Bicycle created successfully',
       data: result,
     });
   } catch (error: any) {
+    //send the error message when faced any error
     res.status(500).json({
       success: false,
       message: error.name === 'ZodError' ? 'Validation failed' : error.message,
@@ -31,18 +33,31 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-
 // get all product controller
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await productServices.getAllProductsFromDb();
+    const { searchTerm } = req.query;
 
+    // Create a search filter if searchTerm is provided
+    const filter = searchTerm
+      ? {
+          $or: [
+            { name: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search for name
+            { brand: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search for brand
+            { type: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search for type
+          ],
+        }
+      : {};
+
+    const result = await productServices.getAllProductsFromDb(filter);
+    //  send the response
     res.status(200).json({
       success: true,
       message: 'Bicycles retrieved successfully',
       data: result,
     });
   } catch (error: any) {
+    //send the error message when faced any error
     res.status(500).json({
       success: false,
       message: error.message,
@@ -56,13 +71,14 @@ const getSingleProducts = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const result = await productServices.getSingleProductsFromDb(productId);
-
+    // send the response
     res.status(200).json({
       success: true,
       message: 'Bicycles retrieved successfully',
       data: result,
     });
   } catch (error: any) {
+    // send the error message when face any error
     res.status(500).json({
       success: false,
       message: error.message,
@@ -78,15 +94,16 @@ const updateProduct = async (req: Request, res: Response) => {
     const updateData = req.body;
     const result = await productServices.updateProductsFromDb(
       productId,
-      updateData,
+      updateData
     );
-
+    // send the response
     res.status(200).json({
       success: true,
       message: 'Bicycles updated successfully',
       data: result,
     });
   } catch (error: any) {
+    // send the error message when face any error
     res.status(500).json({
       success: false,
       message: error.message,
@@ -101,13 +118,14 @@ const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     await productServices.deleteProductsFromDb(productId);
-
+    // send the response
     res.status(200).json({
       success: true,
       message: 'Bicycles deleted successfully',
       data: {},
     });
   } catch (error: any) {
+    // send the error message when face any error
     res.status(500).json({
       success: false,
       message: error.message,
@@ -116,7 +134,6 @@ const deleteProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 export const productControllers = {
   createProduct,
