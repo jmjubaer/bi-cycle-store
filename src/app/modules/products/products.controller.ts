@@ -7,6 +7,8 @@ import ProductValidationSchema from './products.validation';
 const createProduct = async (req: Request, res: Response) => {
   try {
     const product = req.body;
+
+    // verify product data
     const zodParseData = ProductValidationSchema.parse({
       ...product,
       createdAt: new Date(),
@@ -28,6 +30,8 @@ const createProduct = async (req: Request, res: Response) => {
     });
   }
 };
+
+
 // get all product controller
 const getAllProducts = async (req: Request, res: Response) => {
   try {

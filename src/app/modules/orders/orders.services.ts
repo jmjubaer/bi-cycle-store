@@ -61,7 +61,7 @@ const calculateRevenueFromOrder = async () => {
       },
     },
   ]);
-  return totalRevenue; 
+  return totalRevenue[0].totalRevenue; 
 };
 
 export const orderService = {
