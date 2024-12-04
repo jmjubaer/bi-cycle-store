@@ -1,20 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { orderService } from './orders.services';
-import orderValidationSchema from './orders.validation';
 
 // create Order controller
 const createOrder = async (req: Request, res: Response) => {
   try {
     const order = req.body;
     // validate the order data by Zod
-    const zodParseData = orderValidationSchema.parse({
-      ...order,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
 
-    const result = await orderService.createOrderIntoDb(zodParseData);
+    const result = await orderService.createOrderIntoDb(order);
     //send the response
     res.status(200).json({
       success: true,
