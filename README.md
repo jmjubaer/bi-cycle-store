@@ -183,7 +183,7 @@
 
 ### 4. Update the product(Bycycle).
 
-- **API Address:** **`https://bycycle-store-three.vercel.app/api/products/674dd7258be56a2eb6e5cd71`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/products/674c9378a676df9dd04494ce`**
 - **Method:** `PUT`
 - **Request Body: Request body model**
 
@@ -218,7 +218,7 @@
 
 ### 5. Delete a product(Bycycle).
 
-- **API Address:** **`https://bycycle-store-three.vercel.app/api/products/674de504aa105dd2c145b775`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/products/674c9378a676df9dd04494ce`**
 - **Method:** `DELETE`
 
 - **Response:** This is the response model.
@@ -240,9 +240,8 @@
 ```json
 {
   "email": "customer@example.com",
-  "product": "674c9378a676df9dd04494ce",
-  "quantity": 10,
-  "totalPrice": 600
+  "product": "675081e550a09df9d19ad63a",
+  "quantity": 10
 }
 ```
 
