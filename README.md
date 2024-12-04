@@ -2,7 +2,7 @@
 
 ### 1. Add products(Bycycle) into the database.
 
-- **API Address:** **`http://localhost:5000/api/products`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/products`**
 - **Method:** `POST`
 - **Request Body: Request body model**
 
@@ -46,7 +46,7 @@
 
 #### 1. With serachTerm
 
-- **API Address:** **`http://localhost:5000/api/products?searchTerm=TrickFlow`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/products?searchTerm=TrickFlow`**
 - **Method:** `GET`
 
 - **Response:** This is the response model.
@@ -88,7 +88,7 @@
 
 #### 1. Without serachTerm
 
-- **API Address:** **`http://localhost:5000/api/products`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/products`**
 - **Method:** `GET`
 
 - **Response:** This is the response model.
@@ -156,7 +156,7 @@
 
 ### 3. Get specific product(Bycycle) by ID.
 
-- **API Address:** **`http://localhost:5000/api/products/674c9378a676df9dd04494ce`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/products/674c9378a676df9dd04494ce`**
 - **Method:** `GET`
 
 - **Response:** This is the response model.
@@ -183,7 +183,7 @@
 
 ### 4. Update the product(Bycycle).
 
-- **API Address:** **`http://localhost:5000/api/products/674dd7258be56a2eb6e5cd71`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/products/674dd7258be56a2eb6e5cd71`**
 - **Method:** `PUT`
 - **Request Body: Request body model**
 
@@ -218,7 +218,7 @@
 
 ### 5. Delete a product(Bycycle).
 
-- **API Address:** **`http://localhost:5000/api/products/674de504aa105dd2c145b775`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/products/674de504aa105dd2c145b775`**
 - **Method:** `DELETE`
 
 - **Response:** This is the response model.
@@ -233,7 +233,7 @@
 
 ### 6. Create a order.
 
-- **API Address:** **`http://localhost:5000/api/orders`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/orders`**
 - **Method:** `POST`
 - **Request Body: Request body model**
 
@@ -269,7 +269,7 @@
 
 ### 7. Calculate the total Revenue from Orders.
 
-- **API Address:** **`http://localhost:5000/api/orders/revenue`**
+- **API Address:** **`https://bycycle-store-three.vercel.app/api/orders/revenue`**
 - **Method:** `GET`
 
 - **Response:** This is the response model.
