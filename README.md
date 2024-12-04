@@ -223,3 +223,49 @@
     "data": {}
 }
 ```
+### 6. Create a order.
+- **API Address:** **`http://localhost:5000/api/orders`**
+- **Method:** `POST`
+- **Request Body: Request body model**
+```json
+{
+  "email": "customer@example.com",
+  "product": "674c9378a676df9dd04494ce",
+  "quantity": 10,
+  "totalPrice": 600
+}
+```
+#### Notes: When order a product reduce the product quntity form product data.
+
+- **Response:** This is the response model.
+
+```json
+{
+    "success": true,
+    "message": "Order created successfully",
+    "data": {
+        "email": "customer@example.com",
+        "product": "674c9378a676df9dd04494ce",
+        "quantity": 10,
+        "totalPrice": 600,
+        "createdAt": "2024-12-04T02:01:47.914Z",
+        "updatedAt": "2024-12-04T02:01:47.914Z",
+        "_id": "674fb80c457b5b7aed95d167",
+        "__v": 0
+    }
+}
+```
+
+### 7. Calculate the total Revenue from Orders.
+- **API Address:** **`http://localhost:5000/api/orders/revenue`**
+- **Method:** `GET`
+
+- **Response:** This is the response model.
+
+```json
+{
+    "success": true,
+    "message": "Revenue calculated successfully",
+    "data": 23200
+}
+```
