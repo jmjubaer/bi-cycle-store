@@ -7,13 +7,15 @@ const createOrderIntoDb = async (order: TOrder) => {
   const productData = await Product.findOne({
     _id: new ObjectId(order.product),
   });
-
+// throw error if product is not found
   if (!productData) {
     throw new Error('Product not found');
   }
+  // throw error if product is not available in stock or less than ordered quantity
   if (productData.quantity < order.quantity || productData.inStock === false) {
     throw new Error('Insufficient stock, product is not available');
   }
+  // reduce the product quantity
   const restProductQuantity = productData.quantity - order.quantity;
   if (restProductQuantity === 0) {
     await Product.updateOne(
@@ -35,10 +37,12 @@ const createOrderIntoDb = async (order: TOrder) => {
 const calculateRevenueFromOrder = async () => {
   const totalRevenue = await Orders.aggregate([
     {
+       // Convert string to ObjectId
       $addFields: {
-        productObjectId: { $toObjectId: "$product" }, // Convert string to ObjectId
+        productObjectId: { $toObjectId: "$product" },
       },
     },
+    // get product data from product collection
     {
       $lookup: {
         from: "products",
@@ -52,10 +56,12 @@ const calculateRevenueFromOrder = async () => {
     },
     {
       $group: {
-        _id: null, // Group all orders together
+        // Group all orders together
+        _id: null, 
         totalRevenue: {
+          // Calculate total price for each order
           $sum: {
-            $multiply: [ '$productDetails.price','$quantity'], // Calculate total price for each order
+            $multiply: [ '$productDetails.price','$quantity'], 
           },
         },
       },

@@ -79,12 +79,21 @@ const getSingleProducts = async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     // send the error message when face any error
-    res.status(500).json({
-      success: false,
-      message: error.message,
-      error: error,
-      stack: error.stack,
-    });
+    if (error.message === 'Product not found') {
+      res.status(404).json({
+        success: false,
+        message: error.message,
+        error: error,
+        stack: error.stack,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+        error: error,
+        stack: error.stack,
+      })
+    }
   }
 };
 // update product controller
@@ -104,12 +113,21 @@ const updateProduct = async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     // send the error message when face any error
-    res.status(500).json({
-      success: false,
-      message: error.message,
-      error: error,
-      stack: error.stack,
-    });
+    if (error.message === 'Product not found') {
+      res.status(404).json({
+        success: false,
+        message: error.message,
+        error: error,
+        stack: error.stack,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+        error: error,
+        stack: error.stack,
+      })
+    }
   }
 };
 
@@ -126,12 +144,21 @@ const deleteProduct = async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     // send the error message when face any error
-    res.status(500).json({
-      success: false,
-      message: error.message,
-      error: error,
-      stack: error.stack,
-    });
+    if (error.message === 'Product not found') {
+      res.status(404).json({
+        success: false,
+        message: error.message,
+        error: error,
+        stack: error.stack,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+        error: error,
+        stack: error.stack,
+      })
+    }
   }
 };
 

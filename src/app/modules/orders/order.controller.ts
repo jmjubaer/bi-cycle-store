@@ -7,38 +7,52 @@ import orderValidationSchema from './orders.validation';
 const createOrder = async (req: Request, res: Response) => {
   try {
     const order = req.body;
+    // validate the order data by Zod
     const zodParseData = orderValidationSchema.parse({
       ...order,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    
+
     const result = await orderService.createOrderIntoDb(zodParseData);
+    //send the response
     res.status(200).json({
       success: true,
       message: 'Order created successfully',
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.name === 'ZodError' ? 'Validation failed' : error.message,
-      error: error,
-      stack: error.stack,
-    });
+    // throw error when face any errors
+    if (error.message === 'Product not found') {
+      res.status(404).json({
+        success: false,
+        message: error.message,
+        error: error,
+        stack: error.stack,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message:
+          error.name === 'ZodError' ? 'Validation failed' : error.message,
+        error: error,
+        stack: error.stack,
+      });
+    }
   }
 };
 // create Order controller
 const getTotalRevenue = async (req: Request, res: Response) => {
   try {
-  
     const result = await orderService.calculateRevenueFromOrder();
+    //send the response
     res.status(200).json({
       success: true,
       message: 'Revenue calculated successfully',
       data: result,
     });
   } catch (error: any) {
+    // throw error when face any errors
     res.status(500).json({
       success: false,
       message: error.name === 'ZodError' ? 'Validation failed' : error.message,
@@ -50,5 +64,5 @@ const getTotalRevenue = async (req: Request, res: Response) => {
 
 export const orderControllers = {
   createOrder,
-  getTotalRevenue
+  getTotalRevenue,
 };
