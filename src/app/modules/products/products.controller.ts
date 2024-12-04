@@ -92,7 +92,7 @@ const getSingleProducts = async (req: Request, res: Response) => {
         message: error.message,
         error: error,
         stack: error.stack,
-      })
+      });
     }
   }
 };
@@ -103,7 +103,7 @@ const updateProduct = async (req: Request, res: Response) => {
     const updateData = req.body;
     const result = await productServices.updateProductsFromDb(
       productId,
-      updateData
+      updateData,
     );
     // send the response
     res.status(200).json({
@@ -126,7 +126,7 @@ const updateProduct = async (req: Request, res: Response) => {
         message: error.message,
         error: error,
         stack: error.stack,
-      })
+      });
     }
   }
 };
@@ -157,7 +157,7 @@ const deleteProduct = async (req: Request, res: Response) => {
         message: error.message,
         error: error,
         stack: error.stack,
-      })
+      });
     }
   }
 };

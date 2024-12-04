@@ -10,4 +10,4 @@ const orderSchema = new Schema<TOrder>({
   updatedAt: { type: Date, timestamps: true },
 });
 
-export const Orders = model<TOrder>("Order",orderSchema);
+export const Orders = model<TOrder>('Order', orderSchema);

@@ -15,17 +15,14 @@ const getAllProductsFromDb = async (filter: object) => {
 // get single product
 const getSingleProductsFromDb = async (id: string) => {
   const result = await Product.findOne({ _id: new ObjectId(id) });
-  if(!(result?._id)){
-   throw new Error('Product not found')
+  if (!result?._id) {
+    throw new Error('Product not found');
   }
   return result;
 };
 
 // update product
-const updateProductsFromDb = async (
-  id: string,
-  updateData: TProduct,
-) => {
+const updateProductsFromDb = async (id: string, updateData: TProduct) => {
   // update product with given id with new data
   await Product.updateOne(
     { _id: new ObjectId(id) },
@@ -40,7 +37,7 @@ const updateProductsFromDb = async (
 
   const updatedProduct = await Product.findOne({ _id: new ObjectId(id) });
   if (!updatedProduct) {
-    throw new Error('Product not found')
+    throw new Error('Product not found');
   }
   return updatedProduct;
 };
@@ -48,8 +45,8 @@ const updateProductsFromDb = async (
 // delete product
 const deleteProductsFromDb = async (id: string) => {
   const result = await Product.deleteOne({ _id: new ObjectId(id) });
-  if(result.deletedCount < 1){
-    throw new Error('Product not found')
+  if (result.deletedCount < 1) {
+    throw new Error('Product not found');
   }
   return result;
 };
